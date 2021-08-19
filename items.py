@@ -1,6 +1,6 @@
 files = {
     "/etc/hostname": {
-        'content': node.hostname + "\n",
+        'content': node.metadata.get('hostname_override', node.hostname) + "\n",
         'content_type': 'text',
         'owner': "root",
         'group': "root",
