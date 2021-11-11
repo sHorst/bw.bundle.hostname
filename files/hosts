@@ -1,5 +1,9 @@
 127.0.0.1	localhost
+% if "ip_addresses" in node.metadata["interfaces"][node.metadata["main_interface"]]:
 ${node.metadata["interfaces"][node.metadata["main_interface"]]["ip_addresses"][0]}	${node.hostname} ${node.hostname.split(".")[0]} ${" ".join(node.metadata.get("hostname", {}).get("alias_domains", []))}
+% else:
+127.0.0.1	${node.hostname} ${node.hostname.split(".")[0]} ${" ".join(node.metadata.get("hostname", {}).get("alias_domains", []))}
+% endif
 
 % for hnodename, params in sorted(node.metadata.get('etc_hosts', {}).get('nodes', {}).items()):
 <%
